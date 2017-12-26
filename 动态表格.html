@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>动态可操作的表格</title>
+        <style>
+            *{margin: 0;padding: 0;}
+            body{
+                font-size: 13px;
+                line-height: 25px;
+            }
+            table{
+                border-top: 1px solid #333;
+                border-left: 1px solid #333;
+                width: 300px;
+            }
+            td{
+                border-right: 1px solid #333;
+                border-bottom: 1px solid #333;
+            }
+            .center{text-align: center}
+            #rowNum{
+                width: 30px;
+                text-align: center;
+            }
+        </style>
+        <script>
+            //增加一行
+            function addRow(){
+                var fRow = document.getElementById("row3");
+                var newRow = document.createElement("tr");//创建行节点
+                var coll = document.createElement("td");//创建单元格节点
+                coll.innerHTML = "<input style='border: none;outline: none' value='幸福在哪里'>";
+                //为单元格添加文本
+                var co12 = document.createElement("td");
+                co12.innerHTML = "&yen;18.50";
+                co12.setAttribute("align","center");//修改属性
+                newRow.appendChild(coll); //把单元格添加到行节点中
+                newRow.appendChild(co12);
+                fRow.parentNode.insertBefore(newRow,fRow);//把行节点添加到第三行之前
+            }
+            //删除某行
+            function delRow(){
+                var rowNum = document.getElementById("rowNum").value;//获得删除文本框的值 获得是一个字符串
+                //alert(typeof(rowNum));//检查确定是一个字符串
+                rowNum = parseInt(rowNum);//将字符串转换为数字，作为索引号来用
+                //获得所有的行
+                var trTags = document.getElementsByTagName("tr");
+                trTags[rowNum].parentNode.removeChild(trTags[rowNum]);
+               /* var dRow = document.getElementById("row2");//访问被删除的行
+                 dRow.parentNode.removeChild(dRow);*///删除行
+            }
+            //修改标题样式
+            function  updateRow(){
+                var uRow = document.getElementById("row1");
+                //标题行设置为字体加粗、文本居中显示、背景颜色为灰色
+                uRow.setAttribute("style","font-weight:bold;text-align:center;background-color:#cccccc;"
+                );
+                /*uRow.style.fontWeight = "bold";
+                 uRow.style.textAlign = "center";
+                 uRow.style.backgroundColor = "#cccccc";*/
+            }
+            //复制最后一行
+            function  copyRow(){
+                var oldRow = document.getElementById("row3");//访问复制的行
+                var newRow = oldRow.cloneNode(true);  //复制指定的行及子节点
+                document.getElementById("my").appendChild(newRow);//在表格的末尾添加行
+            }
+        </script>
+    </head>
+    <body>
+        <table border="1" cellspacing="0" cellpadding="0" id="my">
+            <tr id="row1">
+                <td>书名</td>
+                <td class="center">价格</td>
+            </tr>
+            <tr id="row2">
+                <td>看的见的风景的房间</td>
+                <td class="center">&yen;30.00</td>
+            </tr>
+            <tr id="row3">
+                <td>60个瞬间</td>
+                <td class="center">&yen;32.00</td>
+            </tr>
+        </table>
+        <input type="button" value="增加一行" onclick="addRow()">
+    <button>
+        <input type="text" value="1" id="rowNum">
+        <span onclick="delRow()">删除某行</span>
+    </button>
+        <input type="button" name="b3" value="修改标题样式" onclick="updateRow()">
+        <input type="button" name="b4" value="复制最后一行" onclick="copyRow()">
+    </body>
+</html>

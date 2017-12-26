@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>DOM</title>
+        <script>
+            window.onload = function () {//加载函数
+                var p1 = document.getElementById("p1");//获取段落节点p
+                var btn1 = document.getElementById("btn1");//获取按钮节点1
+                console.log(p1,btn1);
+                //给按钮1添加点击事件 创建新节点并添到末尾
+                btn1.onclick = function () {
+                    //创建一个图片节点 并赋值给变量img1
+                    var img1 = document.createElement("img");
+                    //设置图片路径 设置图片的src属性
+                    img1.setAttribute("src","img/1.jpg");
+                    //弹出新增节点
+                    alert(img1);//注意 此时页面上并不会看到这个节点
+                    //将新增节点添加到p节点列表的末尾
+                    p1.appendChild(img1);
+                };
+                //获取按钮2
+               var btn2 = document.getElementById("btn2");
+                //给按钮2添加点击事件 指定节点前加新节点
+                btn2.onclick = function(){
+                    //创建图片2节点 并赋值给变量img2
+                    var img2 = document.createElement("img");
+                    //设置图片2路径
+                    img2.setAttribute("src","img/1.jpg");
+                    //在指定的p节点之前插入img2这个新的子节点
+                    p1.parentNode.insertBefore(img2,p1);
+                    //document.body.insertBefore(img2,p1);
+                    //注意body不能少，因为插到具体节点里，不能是document.
+                };
+                //获取按钮3
+                var btn3 = document.getElementById("btn3");
+                //给按钮3添加点击事件
+                btn3.onclick = function () {
+                    //复制p节点，放到变量copy中
+                    var copy = p1.cloneNode(true);
+                    //注意：括号里为空只复制p节点，
+                    //加个true时，则复制p及p里面所有的节点
+
+                    //获取div节点 放到变量div中
+                    var div = document.getElementById("div");
+                    //将复制的节点添加到已有的div节点中
+                    div.appendChild(copy);
+                }
+            }
+        </script>
+    </head>
+    <body>
+    <div id="div">
+        <button id="btn1">创建新节点并添到末尾</button>
+        <button id="btn2">指定节点前加新节点</button>
+        <button id="btn3">复制指定的节点</button>
+    </div>
+<div>
+    <p id="p1">
+        <span>我是p元素里的第一个节点</span>
+    </p>
+</div>
+    </body>
+</html>

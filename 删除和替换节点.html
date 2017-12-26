@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>删除节点</title>
+    </head>
+    <body>
+    <img src="img/3.png" alt="#">
+    <img src="img/4.png" alt="#">
+    <button>删除第一张</button>
+    <button>替换猕猴桃</button>
+
+    <script>
+        var img = document.getElementsByTagName("img");
+        var btn1 = document.getElementsByTagName("button")[0];
+        var btn2 = document.getElementsByTagName("button")[1];
+        console.log(img,btn1,btn2);//检测节点是否获取
+        btn1.onclick = function () {
+            //删除节点
+            document.body.removeChild(img[0]);
+        };
+        btn2.onclick = function () {
+            var span = document.createElement("span");
+            //改变内容
+            span.innerHTML = "我是替换猕猴桃的文本内容";
+            //替换节点
+            document.body.replaceChild(span,img[1]);
+            //改变属性
+            span.title = "我是HTML的全局属性-标题属性";
+            //改变样式
+            btn2.style.border = "5px solid red";
+            //样式里的连接符去掉，第二个单词首字母大写，驼峰写法
+            btn2.style.backgroundColor = "green";
+        };
+    </script>
+    </body>
+</html>
